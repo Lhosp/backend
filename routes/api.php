@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\HotelController;
@@ -32,11 +33,20 @@ Route::get('/entreprises/{entreprise}/projets', [EntrepriseController::class, 'g
 //projet
 Route::get('/projets/{projet}/locations', [ProjetController::class, 'getLocationByProjet']);
 
+
+//auth routes
+Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
+Route::post('/auth/refresh', [AuthController::class, 'refreshToken']);
+Route::post('/auth/update', [AuthController::class, 'updateUser']);
+Route::post('/auth/password', [AuthController::class, 'updatePassword']);
+
 // basics Restful API routes
-Route::apiResource('/entreprises', EntrepriseController::class);
-Route::apiResource('/restaurants', RestaurantController::class);
-Route::apiResource('/hotels', HotelController::class);
-Route::apiResource('/clients', ClientController::class);
-Route::apiResource('/projets', ProjetController::class);
+Route::apiResource('/entreprises', EntrepriseController::class)->middleware('auth:sanctum');
+Route::apiResource('/restaurants', RestaurantController::class)->middleware('auth:sanctum');
+Route::apiResource('/hotels', HotelController::class)->middleware('auth:sanctum');
+Route::apiResource('/clients', ClientController::class)->middleware('auth:sanctum');
+Route::apiResource('/projets', ProjetController::class)->middleware('auth:sanctum');
 
 
