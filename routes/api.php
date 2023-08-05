@@ -41,12 +41,11 @@ Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
 Route::post('/auth/refresh', [AuthController::class, 'refreshToken']);
 Route::post('/auth/update', [AuthController::class, 'updateUser']);
 Route::post('/auth/password', [AuthController::class, 'updatePassword']);
-
+Route::post('/auth/check', [AuthController::class, 'checkUserWithToken']);
 // basics Restful API routes
 Route::apiResource('/entreprises', EntrepriseController::class)->middleware('auth:sanctum');
 Route::apiResource('/restaurants', RestaurantController::class)->middleware('auth:sanctum');
 Route::apiResource('/hotels', HotelController::class)->middleware('auth:sanctum');
 Route::apiResource('/clients', ClientController::class)->middleware('auth:sanctum');
-Route::apiResource('/projets', ProjetController::class)->middleware('auth:sanctum');
-
+Route::apiResource('/projets', ProjetController::class);
 

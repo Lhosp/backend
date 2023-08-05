@@ -213,4 +213,17 @@ class AuthController extends Controller
         }
 
     }
+
+    function checkUserWithToken( Request $request){
+        print ($request);
+        $token= $request-> only(['token']);
+        print ($token);
+        //verify token
+       /* $user = User::where('token', $token)->first();*/
+        return response()->json([
+            'status' => true,
+            'message' => $user,
+        ], 200);
+    }
+
 }
